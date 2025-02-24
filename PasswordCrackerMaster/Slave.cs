@@ -21,6 +21,8 @@ namespace PasswordCrackerMaster
 
 			sw.AutoFlush = true;
 
+			sw.WriteLine("password");
+
 			//send request to the server
 			sw.WriteLine("chunk");
 
