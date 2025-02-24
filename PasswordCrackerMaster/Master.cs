@@ -7,6 +7,8 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PasswordCrackerCentralized.model;
+using PasswordCrackerCentralized.util;
 
 namespace PasswordCrackerMaster
 {
@@ -17,7 +19,7 @@ namespace PasswordCrackerMaster
 		public Master()
 		{
 			//read the password file
-			//List<UserInfo> userInfos = PasswordFileHandler.ReadPasswordFile("passwords.txt");
+			List<UserInfo> userInfos = PasswordFileHandler.ReadPasswordFile("passwords.txt");
 
 			//read the dictionary and create chunks
 
