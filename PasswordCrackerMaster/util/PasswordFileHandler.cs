@@ -29,6 +29,7 @@ namespace PasswordCrackerCentralized.util
             {
                 for (int i = 0; i < usernames.Length; i++)
                 {
+                    string normalizedPassword = NormalizePassword(passwords[i]);
                     byte[] passwordAsBytes = Array.ConvertAll(passwords[i].ToCharArray(), GetConverter());
                     byte[] encryptedPassword = messageDigest.ComputeHash(passwordAsBytes);
                     String line = usernames[i] + ":" + Convert.ToBase64String(encryptedPassword) + "\n";
@@ -75,6 +76,16 @@ namespace PasswordCrackerCentralized.util
         private static byte CharToByte(char ch)
         {
             return Convert.ToByte(ch);
+        }
+
+        /// <summary>
+        /// Normalizes the password by replacing 'ae' with 'æ', 'oe' with 'ø', and 'aa' with 'å'.
+        /// </summary>
+        /// <param name="password">The password to normalize</param>
+        /// <returns>The normalized password</returns>
+        private static string NormalizePassword(string password)
+        {
+            return password.Replace("ae", "æ").Replace("oe", "ø").Replace("aa", "å");
         }
     }
 }
