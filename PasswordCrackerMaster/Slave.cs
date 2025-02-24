@@ -21,6 +21,18 @@ namespace PasswordCrackerMaster
 
 			sw.AutoFlush = true;
 
+
+			sw.WriteLine("password");
+
+			string passwordResponse = sr.ReadLine();
+
+			List<string> passwords = JsonSerializer.Deserialize<List<string>>(passwordResponse);
+
+			if (passwords == null)
+			{
+				throw new ArgumentNullException("password");
+			}
+
 			//send request to the server
 			sw.WriteLine("chunk");
 
