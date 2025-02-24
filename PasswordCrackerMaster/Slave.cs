@@ -8,5 +8,6 @@ namespace PasswordCrackerMaster
 {
     class Slave
     {
+
     }
 }
