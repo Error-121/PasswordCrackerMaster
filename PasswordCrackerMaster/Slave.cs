@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PasswordCrackerCentralized.model;
+using PasswordCrackerCentralized.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -46,12 +48,20 @@ namespace PasswordCrackerMaster
 			CheckWordWithVariations(chunk[0], "Vibeke:EQ91A67FOpjss4uW8kV570lnSa0=");
 		}
 
-		private String CheckWordWithVariations(String dictionaryEntry, String userInfos)
+        private string ReplaceSpecialCharacters(string input)
+        {
+            return input.Replace("oe", "ø")
+                        .Replace("ae", "æ")
+                        .Replace("aa", "å");
+        }
+
+        private String CheckWordWithVariations(String dictionaryEntry, String userInfos)
 		{
+            List<UserInfoClearText> result = new List<UserInfoClearText>(); //might be empty
 
+            dictionaryEntry = ReplaceSpecialCharacters(dictionaryEntry);
 
-
-			return "";
+            return "";
 		}
 	}
 }
