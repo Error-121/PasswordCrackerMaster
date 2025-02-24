@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PasswordCrackerMaster")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a34b20048b9a48fa809c0d7b6ba77086cb53296f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+844a73355820c8a77c94d7d0a8e1396698fe6262")]
 [assembly: System.Reflection.AssemblyProductAttribute("PasswordCrackerMaster")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PasswordCrackerMaster")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
