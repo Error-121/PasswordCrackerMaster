@@ -12,6 +12,7 @@ namespace PasswordCrackerMaster
 {
 	internal class Slave
 	{
+		bool _passwordRequest = true;
 		internal void connect(string host, int port)
 		{
 			TcpClient client = new TcpClient(host, port);
@@ -23,23 +24,45 @@ namespace PasswordCrackerMaster
 
 			sw.AutoFlush = true;
 
-			//send request to the server
-			sw.WriteLine("chunk");
+			while (_passwordRequest)
+			{
+                sw.WriteLine("password");
 
-			//read response from the server
-			String response = sr.ReadLine();
+                string passwordResponse = sr.ReadLine();
 
-			List<String> chunk = JsonSerializer.Deserialize<List<String>>(response);
+                List<string> passwords = JsonSerializer.Deserialize<List<string>>(passwordResponse);
 
-			//Now you have recieved the chunk of 100000 words from the server 
-			//start caracking
-			RunCracker(chunk);
+                if (passwords == null || passwords.Count == 0)
+                {
+                    Console.WriteLine("No valid passwords received. Retrying...");
+                    continue; // Prøver igen, hvis passwords er tom eller null
+                }
 
-			//print whatever you got from server
-			Console.WriteLine(chunk);
+                // Når vi har modtaget passwords, stopper vi denne while-løkke
+                _passwordRequest = false;
+            }
 
-			Console.ReadKey();
-		}
+            //send request to the server
+            sw.WriteLine("chunk");
+
+            //read response from the server
+            String response = sr.ReadLine();
+
+            List<String> chunk = JsonSerializer.Deserialize<List<String>>(response);
+            //Now you have recieved the chunk of 100000 words from the server 
+
+            if (chunk == null || chunk.Count == 0)
+            {
+                throw new Exception("Failed to receive a valid chunk from the server.");
+            }
+            //start caracking
+            RunCracker(chunk);
+
+            //print whatever you got from server
+            Console.WriteLine(chunk);
+
+            Console.ReadKey();
+        }
 
 		private void RunCracker(List<string> chunk)
 		{
